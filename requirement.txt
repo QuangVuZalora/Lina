@@ -1,0 +1,3 @@
+visearch
+django
+pandas
