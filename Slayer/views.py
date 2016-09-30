@@ -18,7 +18,7 @@ def search(request):
             encoded = b64encode(image_file.read())
             mime = "image/jpeg"
             uri = "data:%s;base64,%s" % (mime, encoded)
-            return render_to_response('search.html', {'image_url': uri})
+            return render_to_response('result.html', {'image_url': uri})
     return HttpResponseForbidden('allowed only via POST')
 
 
