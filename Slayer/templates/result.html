@@ -59,6 +59,13 @@
                 <p>
                     <input id="id_image" type="file" class="" name="image" onchange="upload_img(this);">
                 </p>
+                <p>
+                    Gender
+                    <select name="gender" id="id_myselect">
+                        <option value="female" selected="selected">Female</option>
+                        <option value="male">Male</option>
+                    </select>
+                </p>
                 <input type="submit" value="Search"/>
             </form>
             {% if error %}

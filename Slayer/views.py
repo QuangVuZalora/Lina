@@ -1,7 +1,6 @@
 import os
 from base64 import b64encode
 
-from django.http import HttpResponseForbidden
 from django.shortcuts import render
 
 from Lina.settings import STATIC_ROOT
@@ -30,6 +29,7 @@ def search(request):
             image_file = form.cleaned_data['image'] if form.cleaned_data['image'] else get_image_from_url(form)
             if image_file is None:
                 return render(request, "result.html", {"error": "Please choose or upload an image.", 'images': images})
+            gender = form.cleaned_data['gender']
             return render(request, 'result.html', {'images': images})
     return render(request, "result.html", {'images': images})
 
