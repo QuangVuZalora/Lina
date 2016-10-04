@@ -5,6 +5,7 @@ from django.shortcuts import render
 
 from Lina.settings import STATIC_ROOT
 from Slayer.ImageUploadForm import ImageUploadForm
+from Slayer.models import ImageFile
 
 
 def home(request):
@@ -30,6 +31,10 @@ def search(request):
             if image_file is None:
                 return render(request, "result.html", {"error": "Please choose or upload an image.", 'images': images})
             gender = form.cleaned_data['gender']
+            image_obj = ImageFile()
+            image_obj.image = image_file
+            image_obj.save()
+            image_url = image_obj.image.path
             return render(request, 'result.html', {'images': images})
     return render(request, "result.html", {'images': images})
 
