@@ -6,8 +6,9 @@ from django.shortcuts import render
 from Lina.settings import STATIC_ROOT
 from Slayer.ImageUploadForm import ImageUploadForm
 from Slayer.models import ImageFile
+from engine.visenze import Visenze
 
-
+search_engine = Visenze()
 def home(request):
     return render(request, "home.html", {})
 
@@ -35,7 +36,11 @@ def search(request):
             image_obj.image = image_file
             image_obj.save()
             image_url = image_obj.image.path
-            return render(request, 'result.html', {'images': images})
+            products = search_engine.search_image(image_url, gender)
+            print products
+            products = [{'url': link[0], 'image': link[1]} for sku, link in products.iteritems()]
+            print products
+            return render(request, 'result.html', {'products': products, 'images': images})
     return render(request, "result.html", {'images': images})
 
 
