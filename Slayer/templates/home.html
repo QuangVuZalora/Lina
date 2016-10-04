@@ -1,1 +1,26 @@
-abc
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    function upload_img(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#img_id').attr('src', e.target.result);
+                $('#img_id').attr('hidden', false);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+<form action="{% url 'search' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <p>
+        <input id="id_image" type="file" class="" name="image" onchange="upload_img(this);">
+    </p>
+    <img id="img_id" src="#" alt="your image" hidden="true"/>
+    <br/>
+    <input type="submit" value="Search"/>
+</form>
+
+
