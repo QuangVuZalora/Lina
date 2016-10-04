@@ -28,18 +28,20 @@ def search(request):
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            image_file = form.cleaned_data['image'] if form.cleaned_data['image'] else get_image_from_url(form)
+            if form.cleaned_data['image']:
+                image_file = form.cleaned_data['image']
+                image_obj = ImageFile()
+                image_obj.image = image_file
+                image_obj.save()
+                image_url = image_obj.image.path
+            else:
+                image_url = form.cleaned_data['image_url']
+
             if image_file is None:
                 return render(request, "result.html", {"error": "Please choose or upload an image.", 'images': images})
             gender = form.cleaned_data['gender']
-            image_obj = ImageFile()
-            image_obj.image = image_file
-            image_obj.save()
-            image_url = image_obj.image.path
             products = search_engine.search_image(image_url, gender)
-            print products
             products = [{'url': link[0], 'image': link[1]} for sku, link in products.iteritems()]
-            print products
             return render(request, 'result.html', {'products': products, 'images': images})
     return render(request, "result.html", {'images': images})
 
