@@ -1,26 +1,96 @@
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Zalora Demo - Image Search</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static "css/thumbnail-gallery.css" %}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
 <script type="text/javascript">
+    function select_item(input) {
+        $('#img_id').attr('src', input.src);
+        $('#image_url').attr('value', input.alt);
+    }
     function upload_img(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
             reader.onload = function (e) {
                 $('#img_id').attr('src', e.target.result);
-                $('#img_id').attr('hidden', false);
             };
 
             reader.readAsDataURL(input.files[0]);
         }
     }
 </script>
+<div class="container">
+    <div class="col-lg-12">
+        <h1 class="page-header">Demo. Try now!</h2>
+    </div>
+    <div class="col-lg-12">
+        <h1 class="page-header">Apply Image Recommendation To Fashion Recommendation Engine</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="col-lg-12">
+        <h2 class="page-header">Overview Architecture</h2>
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="{% static "intro/system.jpg" %}" >
+        </a>
+        <h2 class="page-header">Image Rec System vs Tranditional Rec System</h2>
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="{% static "intro/feature.jpg" %}" >
+        </a>
+    </div>
+</div>
+<div class="container">
+    <div class="col-lg-12">
+        <h1 class="page-header">Demo. Try now!</h2>
+    </div>
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Powered by <a href="https://www.facebook.com/tuan.nguyenngoc.37">Tuan</a> & <a
+                            href="https://www.facebook.com/quangvu0702">vu.le@zalora.com</a></p>
+                </div>
+            </div>
+        </footer>
 
-<form action="{% url 'search' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-    <p>
-        <input id="id_image" type="file" class="" name="image" onchange="upload_img(this);">
-    </p>
-    <img id="img_id" src="#" alt="your image" hidden="true"/>
-    <br/>
-    <input type="submit" value="Search"/>
-</form>
+    </div>
+    <!-- /.container -->
 
+    <!-- jQuery -->
+    <script src="{% static "js/jquery.js" %}"></script>
 
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+</body>
+
+</html>
