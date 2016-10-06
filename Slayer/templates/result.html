@@ -66,12 +66,12 @@
                 </p>
                 <p>
                     Gender
-                    <select name="gender" id="id_myselect">
+                    <select name="gender" id="id_myselect" style="color:green">
                         <option value="female" selected="selected">Female</option>
                         <option value="male">Male</option>
                     </select>
                 </p>
-                <input type="submit" value="Search"/>
+                <input class="btn btn-success" type="submit" value="Search"/>
             </form>
             {% if error %}
                 {{ error }}
