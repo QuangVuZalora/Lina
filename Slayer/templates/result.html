@@ -46,10 +46,21 @@
         }
     }
 </script>
-
 <div class="container">
     <div class="col-lg-12">
-        <h1 class="page-header">Image Search</h1>
+        <h1 class="page-header">Apply Image Recommendation To Fashion Recommendation Engine</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="col-lg-12">
+        <h2 class="page-header">Overview Architecture</h2>
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="{% static "2_manh.png" %}" >
+        </a>
+    </div>
+</div>
+<div class="container">
+    <div class="col-lg-12">
         <div class="col-md-4">
             <form action="{% url 'search' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
