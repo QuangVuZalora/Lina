@@ -54,12 +54,20 @@
 
 <div class="container">
     <div class="col-lg-12">
-        <h1 class="page-header">DEMO</h2>
+        <h1 class="page-header">DEMO</h1>
         <div class="col-md-4">
             <form action="{% url 'search' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <img id="img_id" src="http://placehold.it/400?text=Choose an image" alt="your image"
-                     class="img-responsive"/>
+                {% if input_url %}
+                    <img id="img_id" src="{% static input_url %}" alt="your image"
+                         class="img-responsive"/>
+                {% elif host_url %}
+                    <img id="img_id" src="{{ host_url }}" alt="your image"
+                         class="img-responsive"/>
+                {% else %}
+                    <img id="img_id" src="http://placehold.it/400?text=Choose an image" alt="your image"
+                         class="img-responsive"/>
+                {% endif %}
                 <input id="image_url" type="hidden" name="image_url" value="#">
                 <p>
                     <input id="id_image" type="file" class="" name="image" onchange="upload_img(this);">
@@ -128,7 +136,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static "js/bootstrap.min.js" %}"></script>
-
+</div>
 </body>
 
 </html>
