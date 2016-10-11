@@ -1,21 +1,45 @@
 import os
-from base64 import b64encode
-
+from base64 import b64encode, b64decode
+from django.http import HttpResponse
 from django.shortcuts import render
-
+import json
 from Lina.settings import STATIC_ROOT
 from Slayer.ImageUploadForm import ImageUploadForm
 from Slayer.models import ImageFile
 from engine.visenze import Visenze
-
+from django.views.decorators.csrf import csrf_exempt
 search_engine = Visenze()
 
 
 def home(request):
     return render(request, "home.html", {})
 
+@csrf_exempt
+def mobile_search(request):
+    print dir(request)
+    products = []
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        print 'ack'
+        if form.is_valid():
+            relative_url = None
+            host_url = None
+            if form.cleaned_data['image']:
+                image_file = form.cleaned_data['image']
+                image_obj = ImageFile()
+                image_obj.image = image_file
+                image_obj.save()
+                image_url = image_obj.image.path
+                host_url = request.build_absolute_uri(image_obj.image.url)
+            gender = form.cleaned_data['gender']
+            products = search_engine.search_image(image_url, gender)
+            products = [{'url': link[0], 'image': link[1]} for sku, link in products.iteritems()]
+            print products
+    return HttpResponse(json.dumps(products), content_type="application/json")
 
 def search(request):
+    print 'value here!'
+    print request.FILES.get('gender')
     image_dir = os.path.join(STATIC_ROOT, 'images/')
     files = [f for f in os.listdir(image_dir) if os.path.isfile(os.path.join(image_dir, f))]
     images = []

@@ -23,5 +23,6 @@ urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
     url(r'^search/$', views.search, name='search'),
+    url(r'^mobile/search/$', views.mobile_search, name='mobile_search'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
