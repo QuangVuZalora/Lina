@@ -43,7 +43,7 @@ class Visenze(object):
                 image_path=image_path,
                 #     image_url = image_url,
                 score=self.score,
-                score_min=self.score_min,
+                score_min=self.score_min,limit=20, 
                 fq=self.fq,
                 **param)
             return self.add_meta_data(response)

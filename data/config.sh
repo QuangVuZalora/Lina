@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# RECSYS_HOME="/home/ubuntu/corvus"
-RECSYS_HOME="/home/vu/projects/Lina/src"
+RECSYS_HOME="/home/ubuntu/Lina"
+#RECSYS_HOME="/home/vu/projects/Lina/src"
 PG_ENDPOINT="rdscat.zalora.com"
 PG_USER="admin_ds"
 PG_DB="ds"
