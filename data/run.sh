@@ -1,9 +1,9 @@
 . config.sh
 cd $RECSYS_HOME
 
-source env_lina/bin/activate
-python manage.py collectstatic
-deactivate
+# source env_lina/bin/activate
+# python manage.py collectstatic
+# deactivate
 
 python data/init.py 
 
