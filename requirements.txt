@@ -1,6 +1,6 @@
+pandas
 h5py
 visearch
 django
-pandas
 Pillow
 configparser

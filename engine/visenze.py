@@ -15,8 +15,7 @@ class Visenze(object):
         self.param = {'detection': 'all'}
         self.score = True
         self.score_min = 0.2
-        self.fq = {'node_country': 'sg'}
-
+        self.fq = {'country': 'sg'}
     # product_url	image_url	lq_image_url
     def _get_metadata(self, key):
         try:
@@ -28,29 +27,29 @@ class Visenze(object):
     def add_meta_data(self, response):
         products = dict()
         keys = [i['im_name'] for i in response['result']]
-        print keys
+
         for key in keys:
             metadata = self._get_metadata(key)
             if metadata:
                 products[key] = metadata
         return products
 
-    def search_image(self, image_path, gender="female"):
+    def search_image(self, image_path, gender="Female"):
         self.fq['gender'] = gender
         param = {'detection': 'all'}
         try:
             response = self.api.uploadsearch(
                 image_path=image_path,
-                #     image_url = image_url,
                 score=self.score,
                 score_min=self.score_min,
                 fq=self.fq,
                 **param)
-            return self.add_meta_data(response)
+            products = self.add_meta_data(response)
+            return products
         except:
             return {}
 
-    def search_url(self, image_url, gender="female"):
+    def search_url(self, image_url, gender="Female"):
         self.fq['gender'] = gender
         param = {'detection': 'all'}
         response = self.api.uploadsearch(

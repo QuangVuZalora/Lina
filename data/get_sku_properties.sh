@@ -1,4 +1,4 @@
-. data/config.sh
+. config.sh
 echo "$(date): Start query sku's category" >> query.log 2>&1
 
 safe_psql_footer_off "

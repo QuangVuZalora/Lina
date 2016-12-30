@@ -18,7 +18,7 @@ class CombineData(object):
                 with open(csv_file, "r") as ins:
                     for line in ins:
                         tokens = line.split()
-                        key = tokens[1] + '-' + tokens[0]
+                        key = tokens[1]
                         value = tokens[2:]
                         try:
                             h5file[key] = pickle.dumps(value)

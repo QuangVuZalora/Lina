@@ -47,9 +47,9 @@ def search(request):
                 return render(request, "result.html", {"error": "Please choose or upload an image.", 'images': images})
             gender = form.cleaned_data['gender']
             products = search_engine.search_image(image_url, gender)
-            products = [{'url': link[0], 'image': link[1]} for sku, link in products.iteritems()]
+            products_ = [{'url': link[0], 'image': link[1]} for sku, link in products.iteritems()]
             return render(request, 'result.html',
-                          {'products': products, 'images': images, 'input_url': relative_url, 'host_url': host_url})
+                          {'products': products_, 'images': images, 'input_url': relative_url, 'host_url': host_url})
     return render(request, "result.html", {'images': images})
 
 
